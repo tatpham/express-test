@@ -16,7 +16,7 @@ jobs:
     - name: Check availability
       run: |
         docker run -d --name test-container -p 3000:3000 my-image-name
-        docker exec --user root test-container apk add curl
+        docker exec --user root test-container apt update && apt install curl
         docker exec test-container curl -v -o /dev/null -H "Connection: close" -H "Content-Type: application/json" \
             -X POST \
             -d '{"template": "shortProgramCertificate", "vars": {"name":"test","dateOfBirth":"10 October 1991","shortProgram":"test","certificateText":"","completionDate":"10 October 1991","programDuration":"","organizationName":"test","mainLogo":"logos/kiron_campus.png","secondaryLogo":"", "organizationColor":"2185d0"}}' \
